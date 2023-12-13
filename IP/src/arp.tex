@@ -1,0 +1,15 @@
+Als we binnen ons eigen netwerk kijken, laten we zeggen op het 192.168.1.0 netwerk, hoe sturen we dan een packet van host 4 naar host 18, als we aannemen dat beide op het netwek zijn aangesloten en aan staan? We gaan hier uit van een LAN op basis van ethernet of Wi-Fi.
+
+Een IP-adres is gekoppeld aan een netwerkkaart. We zouden natuurlijk een packet met daarin het destination IP-adres los kunnen laten op het netwerk en hopen dat er een host is die het packet op pakt, maar zo werkt het niet. We hebben te maken met het OSI-model (of ARPA-model) dat zegt dat een packet van laag 3 eerst door laag 2 moet voordat het bij de physieke laag (laag 1) aankomt. Dus IP moet eerst gebruik maken van het ethernet-protocol. Het zijn dan ook de ethernet-adressen die gebruikt worden op een packet bij een netwerkkaart af te leveren. Ons packet wordt dus ingepakt in een ethernet-frame (enveloppe) met daarop het ethernet-adres van de ontvanger. Dus de vraag is nu hoe komen we aan het ethernet-adres van de ontvanger als we alleen zijn IP-adres weten?
+
+Om dit probleem op te lossen is er een protocol met de naam ARP, Address Resolution Protocol, ofwel een protocol om adres problemen op te lossen. Het protocol is heel simpel en doorloopt de volgende stappen:
+\begin{enumerate}
+\item Kennen we het MAC-address van de bestemming, dan zijn we klaar. Zo niet dan volgt stap 2
+\item Stuur een broadcast uit op het netwerk opzoek naar het MAC-adres dat behoort bij het IP-adres. We maken dus een frame met daarin eerst het MAC-broadcast adres: FF:FF:FF:FF:FF:FF, dan ons MAC-adres, dan het IP-adres waarnaar we opzoek zijn (192.168.1.18) gevolgd door ons eigen IP-adres (192.168.1.4) en tot slot de vraag "who-has". Dit frame gaat het ethernet netwerk op.
+\item Omdat het een ethernet-broadcast is zal elke netwerkkaart op het netwerk het frame oppakken en doorgeven naar de hogere laag (laag 3). De netwerk-laag bekijkt het packet en besluit of zijn IP-adres overeenkomt met het IP-adres in het packet.
+\item Alleen als het IP-adres overeenkomt mag de netwerk-laag iets met de data doen, dus alleen dan zal het zien dat het een vraag bevat, namelijk "who-has". Het weet dan dat de verzender opzoek is naar ons MAC-adres. Het zal dus een nieuwe packet in elkaar zetten met daarin het destination-IP-address en zijn eigen IP-adres. Dat packet gaat terug naar de ethernet-laag die het ontvangen MAC-adres heeft onthouden en dat gebruikt als destination-MAC-address en er zijn eigen MAC-address als source-address op zet.
+\item en zo komt er bij ons een frame aan met ons MAC-address als destination, het gezochte MAC-address als source en in het packet de beide al bekend zijnde IP-adressen.
+\end{enumerate}
+
+Als we dit bij elk packet dat we willen versturen moeten doen is dat behoorlijk omslachtig. De meeste systemen gebruiken dan ook een cache om tijdelijk MAC-adressen die behoren bij bepaalde IP-adressen op te slaan. Deze cache wordt een ARP-tabel genoemd. Het \texttt{arp} commando kan gebruikt worden om informatie uit de ARP-tabel op te vragen.
+

@@ -1,0 +1,18 @@
+Heb je een netwerkkaart configureerd dan is het handig om te weten of je alles goed hebt gedaan. Je zou willen weten of de machine in het juiste netwerk terecht is gekomen en of je andere machines op het netwerk kan bereiken. Uiteindelijk is de communicatie met andere machines het doel van netwerken.
+
+Een belangrijk hulpmiddel bij het testen van IP verbindingen is \texttt{ping}. Ping stuurt een packet uit op een interface naar een bepaald adres en als dat adres antwoord (pong) weet je dat de machine beschikbaar is. Het niet terug keren van een packet kan dus meerdere oorzaken hebben:
+\begin{itemize}
+\item Je hebt het IP-adres niet goed geconfigureert op de netwerkkaart
+\item Er is uberhaupt geen netwerk aanwezig (niet-functioneerdende of niet aanwezige netwerkkabel)
+\item De machine die je probeert te pingen staat uit
+\item De machine die je probeert te pingen heeft niet het opgegegeven IP-adres
+\end{itemize}
+
+Om ervaring op te doen met ping nemen we een IP-adres dat \textquote{altijd} zou moeten werken, namelijk het IP-adres 8.8.8.8. Een ander adres dat je zou kunnen proberen is het adres van je default gateway.
+
+\begin{enumerate}
+\item Gebruik: \texttt{ping 8.8.8.8} op de commandline om te zien of je iets terug krijgt. Op Linux of Mac OS X kan je CTRL-C gebruiken om de test te onderbreken op \texttt{ping -c4 8.8.8.8} gebruiken om maar 4 packetten uit te sturen.
+\item Test of je de default gateway kan pingen. Als je niets terug krijgt dan is de default gateway zo ingesteld dat hij geen antwoord mag geven op ping. Op Linux en Mac OS X kan de CTRL-C gebruiken om de ping te stoppen.
+\item Tik op de commandline: \texttt{ping -h}
+\item Neem de help beschrijving door, zodat je een beeld hebt wat je allemaal met ping kan doen. Met ping kan je weinig stuk maken dus test vooral een aantal van de beschreven opties.
+\end{enumerate}

@@ -1,0 +1,35 @@
+
+\begin{tabular}{ |c|c|c|c|c|c| }
+\hline
+	\multicolumn{2}{|c|}{SPORT} & \multicolumn{2}{c|}{DPORT} \\
+\hline
+	\multicolumn{4}{|c|}{SEQ\#} \\
+\hline
+	\multicolumn{4}{|c|}{ACK\#} \\
+\hline
+	Length & Res & Flags & Window \\
+\hline
+	\multicolumn{2}{|c|}{Checksum} & \multicolumn{2}{c|}{Pointer} \\
+\hline
+	\multicolumn{2}{|c|}{Options} & \multicolumn{2}{c|}{Padding} \\
+\hline
+	\multicolumn{4}{|c|}{Data} \\
+\hline
+\end{tabular}
+
+\begin{description}
+	\item[SPORT] Source Port
+	\item[DPORT] Destination Port
+	\item[SEQ\#] Sequence Number
+	\item[ACK\#] Acknowledgement Number
+	\item[Length] Length of the header
+	\item[RES] Reserved bits
+	\item[FLAGS] Flags that van be set
+	\item[Window] Sliding window-size
+	\item[Checksum] TCP checksum
+	\item[Pointer] Urgent pointer
+	\item[Options] 0 of meer opties
+	\item[Padding] 0 of meer padding bits
+	\item[Data] Data afkomstig van hoger gelegen lagen
+\end{description}
+

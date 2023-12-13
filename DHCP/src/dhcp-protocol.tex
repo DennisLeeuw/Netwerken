@@ -1,0 +1,12 @@
+DHCP maakt gebruik van broadcasts tussen de client en server om elkaar te kunnen vinden. RFC 2131 beschrijft DHCP, wij zullen het hier doen met een minimale beschrijving. DHCP gebruikt een UDP op de transport-laag.
+
+Een werkstation dat geconfigureerd is voor automatische IP toewijzing (DHCP) zal tijdens het configureren van het netwerk (opstart fase) een IP-broadcast (255.255.255.255) het netwerk op sturen, dit is de zogenaamde DHCP Discover. Dit bericht wordt door alle machines op het netwerk gehoord en is gericht aan port 67, afkomstig van port 68.
+
+Elke DHCP-server op het netwerk zal een antwoord terug sturen, DHCP Offer. Dit bericht mag een unicast of een broadcast zijn.
+
+De client ontvangt de packetten in een bepaalde volgorde en er wordt aangenomen dat het eerste packet dat binnenkomt van de dichtstbijzijnde DHCP server is. Dus de client zal proberen om het daarin aangeboden IP-adres te claimen voor gebruik. Het doet dit door een DHCP Request uit te sturen als broadcast om bevestiging te krijgen dat het dit IP-adres mag gebruiken. Alle andere DHCP-servers weten nu dat hun aangeboden IP-adres niet gebruikt gaat worden en dat ze deze dus weer in de pool van te gebruiken IP-adressen kunnen zetten.
+
+De DHCP-server die hoort dat er voor zijn offer nu een request binnen komt, bevestigd naar de client dat het okee is om dit IP-adres te gebruiken. Dit bericht mag weer een unicast of een broadcast zijn.
+
+De berichten van de client naar de server moeten broadcasts zijn zodat alle DHCP servers weten wat er gebeurd, van de server naar de client mogen het ook unicast berichten zijn om in complexe netwerken de hoeveelheid verkeer te minimaliseren.
+

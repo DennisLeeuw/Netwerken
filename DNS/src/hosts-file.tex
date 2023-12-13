@@ -1,0 +1,26 @@
+De eerste methode die werd gebruikt om mensen de mogelijkheid te geven om namen voor computers te gebruiken en machines een IP-adres was de hosts-file. Het bestand bestaat nog steeds om lokaal machines van een naam te voorzien. Het hosts-bestand is een simpel tekst bestand dat er bijvoorbeeld zo uit kan zien:
+
+\begin{lstlisting}[language=bash]
+127.0.0.1	localhost
+127.0.1.1	hcl01.localdomain	hcl01
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+10.181.65.42 my-test-host.example.com my-test-host
+\end{lstlisting}
+
+Je zou dit bestand kunnen zien als een kleine database met aan de linkerkant het IP-adres en rechts, gescheiden door wit (tab of spatie), de naam van de machine.
+
+De hosts-file kan je op Linux of Mac OS X systemen terug vinden als \texttt{/etc/hosts} op een Windows systeem is het \texttt{C:\textbackslash Windows\textbackslash System32\textbackslash Drivers\textbackslash etc\textbackslash hosts}. Het feit dat op een Windows systeem ook het laatste stukje \texttt{\textbackslash etc\textbackslash hosts} is heeft te maken met het feit dat Microsoft de BSD TCP/IP-stack heeft gebruikt als basis voor de TCP/IP-drivers in Windows.
+
+Als je de laatste regel van het voorbeeld (wat begint met 10.181.65.42) toevoegt aan je eigen hosts file dan kan je met
+\begin{lstlisting}[language=bash]
+ping my-test-host
+\end{lstlisting}
+zien dat de machine contact probeert te maken met 10.181.65.42. Het zal dit waarschijnlijk niet kunnen doen, maar je ziet dat hij de naam wel omzet naar het opgegeven IP-adres.
+
+Voordat je verder gaat met dit document verwijder je eerst de toegevoegde regel weer uit je hosts-file.
+

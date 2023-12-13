@@ -1,0 +1,38 @@
+Het segment dat van de transport laag afkomt moet door IP verwerkt worden tot een packet dat het kan doorgeven aan de fysieke laag (OSI-layer 2). In het packet moet natuurlijk duidelijk zijn voor wie (destination IP) en van wie (source IP) het packet komt. Daarnaast zitten er nog wat extra velden in de \textquote{header} van een packet. Hieronder staat de header uitgeschreven in een tabel van 32 bits breed met daaronder de betekenis van elk veld. Niet elk veld wordt volledig uitgelegd, omdat dat buiten de scope van dit document zou gaan, het blijft een introductie op de werking van IP.
+
+\begin{tabular}{ |c|c|c|c|c|c| }
+\hline
+	V & IHL & TOS & \multicolumn{2}{c|}{Total Length} \\
+\hline
+	\multicolumn{3}{|c|}{ID} & Flags & Fragment offset \\
+\hline
+	\multicolumn{2}{|c|}{TTL} & Protocol & \multicolumn{2}{c|}{Header checksum} \\
+\hline
+	\multicolumn{5}{|c|}{SIP} \\
+\hline
+	\multicolumn{5}{|c|}{DIP} \\
+\hline
+	\multicolumn{5}{|c|}{Options + padding} \\
+\hline
+	\multicolumn{5}{|c|}{Segment} \\
+\hline
+\end{tabular}
+
+\begin{description}
+	\item[V] Version - Voor IPv4 is dit 4
+	\item[IHL] Internet Header Length - De lengte in 32-bits woorden van header, minimum is 5 (dus 5x32=160 bits (20 bytes))
+	\item[TOS] Type Of Service - Is dit packet  bijvoorbeeld latency gevoelig of niet (voice moet zo snel mogelijk doorgezet worden)
+	\item[Total length] Total length of packet - Totale lengte, header + segment, van het packet in bytes. Minimum is 20 bytes. Het veld is 16 bites en dus kunnen er maximaal 65535 bytes in een packet.
+	\item[ID] Identification - buiten de scope van dit document
+	\item[Flags] 3-bits veld - buiten de scope van dit document
+	\item[Fragment offset] 13 bits veld - buiten de scope van dit document
+	\item[TTL] Time To Live - 8 bits veld dat routing loops moet voorkomen. Wordt nader behandeld in het document over routing.
+	\item[Protocol] - Protocol in het segment - Protocal dat aangetroffen wordt in het segment deel.
+	\item[Header checksum] - De checksum van de header - Checksum berekent over de header. Als de checksum niet klopt wordt het packet weggegooid (door router of ontvanger)
+	\item[SIP] Source IP address - IP adres van de verzender
+	\item[DIP] Destination IP address - IP adres van de ontvanger
+	\item[Options] 0 of meer opties - buiten de scope van dit document
+	\item[Padding] 0 of meer padding bits - om te zorgen dat we op 32 bits woord einde uitkomen, zodat het begin van het segment op 0 komt. Dus afhankelijk van de opties.
+	\item[Segment] Segment afkomstig van UDP of TCP (of een ander protocol)
+\end{description}
+

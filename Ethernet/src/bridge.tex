@@ -1,0 +1,8 @@
+Als je binnen ethernet netwerken wil bouwen die over de grens van een collision domain gaan heb je een bridge nodig. Een bridge scheidt twee collision domains en zorgt ervoor dat een collision niet wordt doorgezet van de ene kabel op de andere kabel. Een bridge moet dan ook het volledige CSMA/CD protocol ondersteunen.
+
+Omdat het kan gebeuren dat er op een poort van de bridge data binnenkomt die hij niet direct kwijt kan aan een andere poort, omdat daar al een netwerkkaart data aan het sturen is, moet een bridge instaat zijn om data tijdelijk op te slaan. Dus naast de volledige ondersteuning van het CSMA/CD-protocol moet een bridge ook voldoende geheugen hebben om data tijdelijk op te slaan. Ook de repeater functie zit in een bridge, want het uitgestuurde signaal moet volledig voldoen aan de ethernet standaard.
+
+Een bridge is daardoor een complexer apparaat. De techniek die gebruikt wordt heet store-and-forward, dat betekent dat een frame eerst wordt opgeslagen, er gekeken wordt waar het naar toe moet en daarna wordt doorgezet naar de uitgaande poort.
+
+Een belangrijke vraag hierbij is hoe de bridge weet op welke ethernetpoort hij het frame moet uisturen. Omdat ethernet-frames altijd het source en destination MAC adres in zich hebben, kan de bridge van het netwerk leren welke destinations er op welke poort zitten door de source-adressen te verzamelen, want de verzender (source) zit aan de poort waarop het frame is binnengekomen. Als een bridge niet weet op welke poort een destination zit, dan zal het het frame naar alle poorten sturen.
+

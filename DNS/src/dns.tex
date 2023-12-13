@@ -1,0 +1,11 @@
+Op een lokaal netwerk is het mogelijk om het hosts-bestand bij te houden, maar bij een wereldomvattend netwerk zoals het Internet is dat niet meer te doen. Er moest dus een wereldwijde database komen die op afstand geraadpleegd kan worden. Het nadeel van een enkele database is dat het tevens een single point of failure (SPOF) is. Als de database-server omvalt is er geen mogelijkheid meer om namen om te zetten naar IP-adressen. Ook en verbroken netwerkverbinding kan zorgen dat een deel van het netwerk niet meer bij de database kan. Om al deze problemen het hoofd te kunnen bieden is er gekozen voor een gedistribureerd systeem. Er is niet \'e\'en enkele database dat de namen van de machines kent.
+
+Zoals je misschien wel weet is net Internet opgedeeld in zogenaamde domeinen. Het adres www.google.com bestaat uit drie delen. Het eerste deel is www, dit is de host-naam. Het google deel is het domein en het com deel is het top-level-domain (TLD). De database-servers worden dan ook Domain Name Servers genoemd, afgekort DNS.
+
+Er zijn verschillende TLD's op de wereld. Elk land heeft zijn eigen TLD, die voor Nederland is nl, voor Duitsland de en die voor Belgi\"e be. Zo heeft elk land zijn eigen TLD. Daarnaast zijn er vele generieke TLD's zoals com voor commerci\"ele bedrijven, org voor organisaties en edu voor educatieve instellingen. Elke TLD heeft zijn eigen name-server wat al zorgt voor een enorme wereldwijde spreiding.
+
+Een organisatie als Google heeft zijn eigen domein (google.com) en daarmee ook zijn eigen domein-database (DNS). Dus als je wilt weten wat het adres is dat hoort bij www.google.com dan vraag je dat aan de DNS van Google.
+
+%%%% Van onder naar boven uitzoeken wie het is
+
+%%%% Hoe weet een client welke DNS server hij moet hebben (geen eigen dns-server)

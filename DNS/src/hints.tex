@@ -1,0 +1,10 @@
+De InterNIC is verantwoordelijk voor het bijhouden van de root van de name servers van het Internet. Dit is een kort lijstje van alle servers wereldwijd die alle TLDs kennen. Dit is een lijstje dat je af en toe eens moet updaten om te zorgen dat je de laatste versie hebt. Het is beschikbaar op \url{https://www.internic.net/domain/named.cache}. Het is bekend onder de naam \textquote{hints-file}.
+
+Het bestandje heeft allemaal regels die vertellen waar root servers gevonden kunnen worden. De root van een domein is de . (punt). Eigenlijk zou je een domein naam dus moeten schrijven als wwww.microsoft.com. met een punt aan het einde. Maar omdat die punt er altijd moet staan laten we hem weg en nemen we aan dat die er is. In de hints-file komen we deze punt weer tegen:
+\begin{lstlisting}[language=bash]
+.                        3600000      NS    A.ROOT-SERVERS.NET.
+A.ROOT-SERVERS.NET.      3600000      A     198.41.0.4
+A.ROOT-SERVERS.NET.      3600000      AAAA  2001:503:ba3e::2:30
+\end{lstlisting}
+We zien hier dat voor de root (.) we de name server (NS record) A.ROOT-SERVERS.NET. moeten gebruiken en dat die server het IPv4 adres (A record) 198.41.0.4 heeft. Ook een IPv6 adres (AAAA record) is gegeven voor de name server.
+

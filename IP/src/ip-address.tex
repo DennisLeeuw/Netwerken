@@ -1,0 +1,38 @@
+IP is een afkorting en staat voor Internet Protocol, vandaar dat het wereldwijde netwerk het Internet heet. IP is het protocol dat op OSI-model laag 3 (network-layer) werkt.
+
+De network-layer uit het OSI-model is verantwoordelijk voor het transporteren van data over het netwerk. Waar layer 2 (o.a. ethernet) verantwoordelijk is voor het bezorgen van data op een lokaal netwerk (LAN) is IP verantwoordelijk voor de wereldwijde data bezorging. De data die op deze laag getransporteerd wordt heet een "packet".
+
+We kunnen de werking van IP vergelijken met het post systeem, waar het ook op gemodelleerd is. Vandaar ook de naam packet voor de data die over het netwerk gaat, het is vergelijkbaar met een postpakket. Om een postpakket te versturen heb je twee cruciale zaken nodig:
+\begin{enumerate}
+\item landcode + postcode (zipcode)
+\item huisnummer
+\end{enumerate}
+Alle andere zaken zijn voor de post niet relevant. De post gebruikt de postcode (en landcode) om te zorgen dat het packet in het juiste gebied terecht komt. Is het daar aangekomen dan zorgt de postbode ervoor dat het pakket bij het juiste huisnummer wordt afgeleverd.
+
+Om deze verzending van een packet over het netwerk mogelijk te maken hebben we ook twee cruciale zaken nodig:
+\begin{enumerate}
+\item het IP-adres
+\item het subnet-mask
+\end{enumerate}
+De logica zit hier anders in elkaar dan bij de post, het subnet-mask is niet het huisnummer en het IP-adres is niet het netwerk. We hebben het subnet-mask en IP-adres samen nodig. Hoe dat werkt dat bespreken we in dit hoofdstuk.
+
+Een IP-adres bestaat uit vier blokjes gescheiden door een punt. Elk blokje bestaat uit 8-bits en daarmee kan je decimaal tellen van 0 tot 255. We noteren een IP-adres als een decimaal adres, waarbij elk blokje van 8-bits zijn eigen decimale getal vormt. Een voorbeeld van een IP-adres is 192.168.1.4. Binair zou dit zijn 11000000.10101000.00000001.00000100.
+
+Ook het subnet-mask is opgebouwd uit vier blokjes gescheiden door een punt. Ook die blokjes zijn 8-bits en kunnen dus een waarde hebben van 0-255, maar ze mogen niet elke waarde bevatten. Voor het subnet-mask is het handig om te denken in binair, het linker deel van het subnet-mask moet uit enen bestaan en het rechterdeel uit nullen. Er mag geen nul tussen de enen staan en ook geen 1 tussen de nullen. Daarmee zijn dus bepaalde getallen niet mogelijk in een subnet-mask. Een voorbeeld van een subnet-mask is 255.255.255.0, ook 255.0.0.0 is een geldig subnet-mask. Als we het subnet-mask 255.0.0.0 omzetten naar binair dan komen we op 11111111.00000000.00000000.00000000. Alle linker bits zijn 1 en alle rechter bits zijn 0, dus is het een geldig subnet-mask. Nemen subnet-mask we bijvoorbeeld 11111111.11101111.00010000.00000000 als subnet-mask dan zien we dat tussen de linker enen een nul staat en dat tussen de rechter nullen een \'e\'en staat. Beide is niet toegestaan dus 255.239.16.0 is geen geldig subnet-mask.
+
+Het subnet-mask bepaalt welk deel van het IP-adres het netwerk-adres is en welk deel het host-adres. Het netwerk-adres is vergelijkbaar met de landcode + postcode van de post en het host-adres is vergelijkbaar met het huisnummer. Een voorbeeld maakt dit waarschijnlijk het snelst duidelijk. Nemen we IP-adres 192.168.1.4 met subnet-mask 255.255.255.0 dan is het netwerk-adres 192.168.1.0 en het huisnummer 4. Nemen we hetzelfde IP-adres, maar subnet-mask 255.0.0.0 dat is het netwerk-adres 192.0.0.0 en het huisnummer 168.1.4.
+
+Een computer werkt met 1-en en 0-en en gebruikt die dan ook om te berekenen welk deel van het IP-adres het netwerk-adres is en welk deel het host-adres. De computer gebruikt hiervoor de AND-functie. De waarheidstabel van de AND-functie is:
+\include{src/and-waarheidstabel}
+De computer neemt het IP-adres (192.168.1.4) en doet een AND met de subnet-mask (255.0.0.0). Om te snappen wat er gebeurt moeten we eerst beide getallen omzetten naar binair. Op deze binaire getallen laten we de AND-functie los. De wiskundige notatie voor de AND is \begin{math}\land\end{math}. Het sommetje komt er dus zo uit te zien:
+\begin{math}\newline
+11000000.10101000.00000001.00000100 \land \newline
+11111111.00000000.00000000.00000000 =     \newline
+11000000.00000000.00000000.00000000
+\end{math}
+
+Het adres van het netwerk is dus 192.0.0.0.
+
+Het is hopelijk opgevallen dat het netwerk-adres altijd uit 4 blokken blijft bestaan (192.168.1.0 of 192.0.0.0). Het netwerk-adres is het laagste adres in het netwerk en is een \textquote{gereserveerd} adres. Het mag niet uitgedeeld worden aan een netwerk-interface. Een ander adres dat niet uitgedeeld mag worden is het zogenaamde broadcast-adres. Het broadcast-adres wordt gebruikt om een bericht te sturen aan alle huisnummers in een netwerk. Het broadcast adres is gedefinieerd als het hoogste adres in het netwerk. In ons voorbeeld van het 192.168.1.0 netwerk met subnet-mask 255.255.255.0 is het hoogste netwerk adres 192.168.1.255. Ook dit adres mag dus niet worden uitgedeeld aan een netwerk-interface. Met twee gereserveerde adressen blijven dus de adressen 1-254 over als huisnummers voor ons 192.168.1.0 netwerk.
+
+Met een IP-adres en een subnet-mask hebben we dus een volledige beschrijving van adres op het Internet. We kennen het netwerk-adres (postcode) en we kennen het host-adres (huisnummer). We weten welke andere host-adressen er zijn binnen ons netwerk en wie dus onze mogelijke "buren" zijn. Alle buren zitten in hetzelfde netwerk.

@@ -1,0 +1,16 @@
+Een tool die je op bijna elk operating system kan gebruiken om vragen te stellen aan DNS is \texttt{nslookup}. In de meest eenvoudige vorm kan \texttt{nslookup} gebruikt worden om een IP-adres bij een domeinnaam op te vragen:
+\begin{lstlisting}[language=bash]
+nslookup www.google.com
+\end{lstlisting}
+
+Je kan ook specifiek om het IPv4 adres vragen door alleen het A-record op te vragen:
+\begin{lstlisting}[language=bash]
+nslookup -type=A www.google.com
+\end{lstlisting}
+
+We weten dat DNS aan de root van de DNS-tree begint en langzaam verder gaat. Dat gaan wij nu ook doen:
+\begin{enumerate}
+\item Gebruik \texttt{nslookup} om een met lijst name-servers op te vragen die behoren bij het com domain.
+\item Vraag aan \'e\'en van de gevonden name-servers wat de name-servers zijn voor google.com.
+\item Vraag aan \'e\'en van de name-servers van Google wat de IP-adressen zijn van de mail-servers van Google (2 queries).
+\end{enumerate}

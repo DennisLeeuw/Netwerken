@@ -1,0 +1,9 @@
+De switch is een opvolger van de bridge. Het bevat alle functies die een bridge ook heeft.
+
+Een switch maakt het netwerk sneller door elke ethernetkaart direct op zijn eigen bridge-port aan te sluiten. Op elke switchport sluit je dus \'e\'en machine aan. Dit heeft als voordeel dat het collision domain terug gebracht wordt tot 2 netwerkkaarten, de netwerkkaart van het aangesloten station en de netwerk-poort van de switch. Er kunnen daardoor bijna geen collisions meer plaats vinden want als de een aan het zenden is dan weet de ander het, en omgekeerd.
+
+Doordat er geen collisions meer plaatsvinden, heeft een switch minder geheugen nodig om frames op te slaan. De snelheid in de switch (backplane) bepaalt de kwalitiet van de switch. Hoe sneller de backplane hoe duurder een switch vaak is.
+
+Een andere techniek die de switch sneller maakt dan een bridge is dat een switch het begin van een frame inleest, kijkt naar het destination MAC address en daarop vast "sckakelt" zodat het source en destination netwerk aan elkaar gekoppeld zijn. Er hoeft dus niet eerst het hele frame ingelezen te worden en dan weer doorgestuurd. Een franme gaat door het switchen sneller van de ene naar de andere poort.
+
+Switches kunnen natuurlijk ook aan elkaar gekoppeld worden om grotere netwerken te bouwen met meer netwerkpoorten. Dit heeft echter wel gevolgen voor de snelheid van het netwerk. Als we een switch hebben met 24 poorten van 100 Mbps en we verbinden 1 poort met een andere switch die ook 100 Mbps poorten heeft dan is de verbinding tussen de twee switches 100 Mbps. Als nu twee systemen tegelijk met machines aan de andere switch willen praten dan moeten die enkele 100 Mbps verbinding tussen de switches gedeeld worden, effectief blijft er dus 50 Mbps over.

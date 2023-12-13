@@ -1,0 +1,25 @@
+Elke server kan meerdere netwerkkaarten bevatten. Om die een eigen frame te kunnen sturen moet een netwerkkaart een uniek adres hebben. Dit adres is het MAC-adres, dit is dus een fysiek adres en onderdeel van de netwerkkaart. Het MAC-adres is uniek op de wereld, er is geen tweede netwerkkaart met hetzelfde adres.
+
+Het MAC-adres bestaat uit 6 blokjes van 2 hexadecimale digits. Bij de notatie van dit adres kunnen de blokjes gescheiden zijn door een dubbele punt of door een streepje: 01:12:23:ab:bc:cd of 01-12-23-ab-bc-cd. De notatie verschilt per operating system. Het MAC-adres is opgedeeld in twee delen, namelijk de eerste 3 blokjes en de tweede 3 blokjes. De eerste drie blokjes zijn de Organisation Unique Identifier (OUI). De OUI is het ID dat gegeven is aan een organisatie (Apple, Broadcom, D-Link). De tweede set van drie blokjes is het deel dat het adres uniek maakt. Is een organisatie door zijn adressen heen dan vraagt het een nieuwe OUI aan voor de productie van meer netwerkkaarten.
+
+Ethernet is een OSI-layer 2 (data link) protocol. De data die over het netwerk gaat heten dan ook frames. Elk frame heeft zowel het source als het destination adres in het frame zitten:
+
+\begin{tabular}{ |c|c|c|c|c|c| }
+\hline
+	preamble & DMAC & SMAC & length & packet & FCS \\
+\hline
+\end{tabular}
+
+\begin{description}
+	\item[preamble]
+	\item[DMAC] Destination MAC address
+	\item[SMAC] Source MAC address
+	\item[length] De lengte van het frame
+	\item[data] informatie van hogere lagen uit het OSI-model (laag 3)
+	\item[FCS] Frame Check Sequence een controle nummer om te zien of alle bits goed zijn overgekomen (CRC)
+\end{description}
+
+
+De IEEE is degene die de OUI's uitgeeft. De lijst met uitgegeven OUI's is een publieke lijst en kan gevonden worden op \url{https://standards-oui.ieee.org/oui/oui.txt}. Omdat deze lijst publiek is kun je dus aan de frames op het netwerk zien van welk type netwerkkaart de data afkomstig is en waar de data naartoe gaat. Op een netwerk met alleen Apple machines heb je daar niet veel aan, behalve als er opeens een frame langs komt van een Broadcom netwerkkaart, dan is er kennelijk wat aan de hand dat om onderzoek vraagt.
+
+De ethernetkaart filtert frames van het netwerk als het destination address overeenkomt met het MAC-adres van de kaart, alle andere frames worden genegeerd. Er is \'e\'en uitzondering, namelijk het MAC-adres \newline\texttt{ff:ff:ff:ff:ff:ff}, dit is het ethernet broadcast adres. Alle netwerkkaarten die dit adres zien als destination address zullen het frame doorgeven naar de hogere lagen in de network stack.

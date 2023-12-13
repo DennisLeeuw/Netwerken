@@ -1,0 +1,26 @@
+Als je netwerken aan elkaar koppelt heb je apparaten nodig die die koppeling maken. Deze apparaten worden gateways of routers genoemd. Een router verbindt dus verschillende netwerken aan elkaar en routeert data van het ene naar het andere netwerk.
+
+Ook een router of gateway heeft een IP-adres op zijn netwerk-interface. Elke interface van een router is gekoppeld aan een netwerk en heeft een IP-adres (en subnet-mask) die behoort bij dat netwerk. In router in je netwerk hangen kost je op dat netwerk dus een IP-adres dat je niet voor een host kan gebruiken.
+
+Doordat de router een IP-adres en subnet-mask heeft gekregen op een interface weet hij ook welk netwerk er op die poort zit. Van alle lokaal aangesloten netwerken weet hij dus welk netwerk waar zit. Een binnen komend packet kan dus direct gerouteerd worden naar de netwerken die hij kent.
+
+Als er aan \'e\'en netwerk meerdere routers hangen en deze routers maken verbinding met verschillende netwerken, dan kunnen we elke router gaan vertellen welke router wat weet. Stel je het volgende voor: We hebben een netwerk 192.168.1.0 en daaraan hangt een router met IP-adres 192.168.1.2 en een router met IP-adres 192.168.1.3. Aan de router met het IP-adres 192.168.1.2 hangen ook de netwerken 192.168.20.0 en 192.168.21.0 en aan aan de router met het adres 192.168.1.3 hangen de netwerken 192.168.30.0 en 192.168.31.0. Als er nu een packet binnenkomt bij de router 192.168.1.2 voor het IP-adres 192.168.31.5, dan zou het handig zijn als router 192.168.1.2 weet dat hij het naar 192.168.1.3 moet sturen. Om dit mogelijk te maken gebruiken we routing-tabellen.
+
+Een routing tabel is vrij simpel en zou er op 192.168.1.2 bijvoorbeeld zo uit kunnen zien:
+
+\begin{tabular}{ |c|c|c| }
+\hline
+192.168.1.0 & 255.255.255.0 & interface 0 \\
+\hline
+192.168.20.0 & 255.255.255.0 & interface 1 \\
+\hline
+192.168.21.0 & 255.255.255.0 & interface 2 \\
+192.168.30.0 & 255.255.255.0 & 192.168.1.3 \\
+\hline
+192.168.31.0 & 255.255.255.0 & 192.168.1.3 \\
+\hline
+\end{tabular}
+
+Deze tabel zegt dat al het verkeer dat bij 192.168.1.2 binnenkomt en dat valt binnen de range van 192.168.30.0/2555.255.255.0 doorgestuurd moet worden naar 192.168.1.3.
+
+Hiermee kunnen we alle netwerken aan elkaar knopen en allemaal voorzien van routing-tabellen. Dat is voor een kleine collectie van netwerken prima te doen, maar voor de duizenden netwerken die gekoppeld zijn aan Internet is dat onmogelijk. De routing tabellen zouden veel te groot worden.

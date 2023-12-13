@@ -1,0 +1,11 @@
+Het protocol dat door ethernet gebruikt wordt om data over een kabel te versturen is CSMA/CD, Carrier Sense Multiple Access with Collision Detection. Het is een mondvol, maar kan vrij simpel opgehakt worden in 3 stukken:
+
+De ethernetkaart luistert naar het netwerk (Carrier Sense). Als het data te versturen heeft wacht het tot het geen activiteit meer hoort op het netwerk, als de kabel \textquote{leeg} is kan er een frame verstuurd worden.
+
+Het gevolg is dat meerdere netwerkkaarten tegelijk hun data kunnen gaan versturen (Multiple Access).
+
+Als er meerdere tegelijk hun data versturen wordt het natuurlijk een zooitje, net zoals dat meerdere personen tegelijkertijd door elkaar gaan praten. Er moet dus een meganisme zijn om te ontdekken dat iedereen door elkaar praat (Collision Detection). Het detecteren van de bosting van data zorgt ervoor dat iedereen stopt met zenden. De zendende netwerkkaarten berekenen een random-nummer en gebruiken dit om daarmee een random-tijd hun mond te houden (back-off-time) voordat ze weer opnieuw beginnen met hun data te versturen. Doordat de back-off-time random is, is de kans dat er weer twee stations tegelijk gaan beginnen met verzenden van hun data zeer onwaarschijnlijk is.
+
+Met dit simpele protocol regelt ethernet de toegang tot de carrier (kabel). Je kunt je voorstellen dat als er steeds meer netwerkkaarten op het netwerk aangesloten worden de kans toeneemt dat twee of meer netwerkkaarten tegelijkertijd hun data willen versturen en dat dus de kans op collisions toeneemt. Dit was vooral vroeger van belang toen er veelvuldig gebruik gemaakt werd van hubs; met de komst van switches is dit probleem sterk afgenomen.
+
+Alle netwerkkaarten die zo zijn aangesloten dat ze een collision kunnen horen behoren tot hetzelfde collision domain. Switches (en bridges) scheiden collision domains.

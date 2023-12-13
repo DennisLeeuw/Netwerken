@@ -1,0 +1,6 @@
+De database van de verschillende DNSen kan wijzigen. Het kan bijvoorbeeld gebeuren dat de web-server op een andere machine komt te draaien en dat dus het IP-adres wijzigt. Dit willen we in het name-server database wijzigen, zolang de andere name-servers aan ons systeem vragen wat het IP adres is gaat het goed, dan is de wijziging onmiddelijk, maar als een name-server een cache heeft aangelegd, dan zal die voorlopig zijn cache blijven gebruiken. Het kan dus enige tijd duren voordat een wijziging op het gehele Internet bekend is.
+
+De manier om caches te laten verlopen is het updaten van de \textquote{serial}. De serial is een numeriek ID. Een hogere serial betekent een nieuwere versie. Voor de serial wordt meestal de datum + een versie nummer genomen: 2023120603. Deze serial staat voor 6 december 2023 de derde wijziging. Je kan zo maximaal 99 wijzigingen op een dag doen (01 tot 99).
+
+Een DNS kan dus de serial opvragen om te weten te komen of het opnieuw een query moet doen naar een IP-adres of dat hij de huidige cache kan laten bestaan.
+

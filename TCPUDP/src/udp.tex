@@ -1,0 +1,9 @@
+TCP is behoorlijk omslachtig. De verzendende partij moet in de gaten houden of het voor elk verzonden segment een ontvangstbevestiging heeft ontvangen en de ontvangende partij moet nagaan of alle data is aangekomen en in de juiste volgorde staat. Toch is dit de enige manier om data op de juiste manier over een onbetrouwbaar netwerk te versturen.
+
+Maar wat nou als de integriteit van de data niet zo belangrijk is en dat snelheid bijvoorbeeld van veel groter belang is?
+
+Laten weer de film van 1,5 uur nemen. Als we die op hakken in hele kleine segmenten, dan is het misschien niet zo heel erg als we een segment missen. Dat levert misschien een kleine vervorming op op het scherm, maar de film gaat gewoon verder. Als we zouden moeten wachten tot het segment opnieuw verstuurt is dan zou het een freeze van het scherm kunnen opleveren omdat we zitten te wachten op dat ene segment. Bij een film is het dus belangrijker dat de film doorgaat dan dat hij volledig elke pixel laat zien.
+
+Voor dit soort data overdracht is UDP bedacht. UDP werk ook op de transport-laag, maar het controleert niet of de data correct is aangekomen en het kijkt ook niet of de segmenten wel in de juiste volgorde staan. Hogere lagen in de protocol-stack kunnen natuurlijk altijd nog deze functies uitvoeren, maar UDP doet het niet.
+
+UDP wordt dan ook veel gebruikt als de integriteit van data niet zo belangrijk is, maar snelheid en reactietijd wel. Denk hierbij aan telefonie over Internet, videoconferencing, maar ook het spelen van netwerk-games.

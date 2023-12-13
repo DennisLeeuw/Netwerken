@@ -1,0 +1,12 @@
+Hoe zorgt een client, bijvoorbeeld je browser, dat je bij de domeinnaam een IP adres krijgt?
+
+Je browser geeft aan de TCP/IP stack door dat hij bijvoorbeeld verbinding wil maken met www.microsoft.com. Het eerste dat je TCP/IP stack dan gaat doen is kijken of het weet welke name servers er zijn. Deze name server moet je handmatig hebben geconfigureerd of ze moeten door DHCP aan je machine zijn gegeven.
+
+Je machine neemt contact op met een DNS op port 53 en vraagt aan de server of hij weet wat het IP-adres is van www.microsoft.com.
+
+De kans is natuurlijk klein dat jouw name server de IP-adressen van Microsoft kent. Dus je name server neemt contact op met een root name server. Een root name server kent de Top Level Domains (TLDs) van het Internet. De root server kan onze server verwijzen naar de name server voor het .com domain. Die name server kan ons verwijzen naar het IP-adres van de name server van het .microsoft.com domein.
+
+Als we het IP-adres hebben van de name server van Microsoft dan kan onze name server aan de name server van Microsoft vragen wat het IP adres is voor www.microsoft.com en dat antwoord kan onze server dan weer aan onze machine gegeven. Daarna kunnen we een verbinding leggen met de web-server van Microsoft.
+
+Om toekomstige DNS queries te versnellen, kunnen de gevonden oplossing tijdelijk opslaan (cache) zodat we een volgende query sneller kunnen beantwoorden. Voor veel gebruikte domeinen helpt dit om het proces te versnellen. Het nadeel is natuurlijk wel dat als er in de DNS bij Microsoft een wijziging plaats vindt wij die niet meteen medelen aan onze gebruikers. Pas als de cache rijd verlopen is zullen we bij Microsoft controleren of het gevonden IP nog geldig is en tot de conclusie komen dat dit niet het geval is. Pas daarna weten ook onze gebruikers het.
+

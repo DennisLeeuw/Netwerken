@@ -1,0 +1,127 @@
+\documentclass[a4paper,12pt,twoside,openright,titlepage]{book}
+
+%Additional packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[dutch,english]{babel}
+\usepackage{syntonly}
+\usepackage[official]{eurosym}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{float}
+\usepackage{xurl}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=, pdfauthor=, pdfsubject=, pdfkeywords=}
+\usepackage{multirow,tabularx}
+\usepackage[table]{xcolor}
+\usepackage{scrextend}
+\addtokomafont{labelinglabel}{\sffamily}
+\usepackage{listings}
+\usepackage{adjustbox}
+\usepackage{csquotes}
+
+%define inch
+\usepackage{mathpazo,amsmath}
+\def\inch#1{#1''}
+
+% Turn on indexing
+\usepackage{imakeidx}
+\makeindex[intoc]
+
+% Define colors
+\usepackage{color}
+\definecolor{ashgrey}{rgb}{0.7, 0.75, 0.71}
+
+% Listing style
+\lstset{
+  backgroundcolor=\color{ashgrey},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+}
+
+% Uncomment for production
+% \syntaxonly
+
+% Style
+\pagestyle{headings}
+
+%%%%%%%%%%%%%%%%%%
+% Begin document %
+%%%%%%%%%%%%%%%%%%
+
+% Define document
+\author{D. Leeuw}
+\title{TCP en UDP}
+\date{\today\\v.0.5.0}
+
+\begin{document}
+\selectlanguage{dutch}
+
+\maketitle
+
+\copyright\ 2023 Dennis Leeuw\\
+
+\begin{figure}[H]
+\includegraphics[width=0.3\textwidth]{CC-BY-SA-NC.png}
+\end{figure}
+
+\bigskip
+
+\input{src/CC-licentie}
+
+%%%%%%%%%%%%%%%%%%%
+%%% Introductie %%%
+%%%%%%%%%%%%%%%%%%%
+
+\frontmatter
+\chapter{Over Dit Document}
+%\input{src/DocOver_VPN}
+%\input{src/DocChanges_VPN}
+\section{Leerdoelen}
+\input{src/leerdoelen}
+\section{Voorkennis}
+\input{src/voorkennis}
+
+%%%%%%%%%%%%%%%%%
+%%% De inhoud %%%
+%%%%%%%%%%%%%%%%%
+\tableofcontents
+
+\mainmatter
+
+\chapter{Data integriteit}
+\input{src/data_integriteit}
+\section{TCP}
+\input{src/tcp}
+\section{UDP}
+\input{src/udp}
+
+\chapter{De eindbestemming}
+\input{src/ports}
+
+\chapter{Headers}
+\section{TCP header}
+\input{src/tcp_segment}
+\section{UDP header}
+\input{src/udp_segment}
+
+\chapter{Opdrachten}
+\section{nmap}
+
+%\chapter{Praktijk opdrachten}
+%\section{Router Configuratie}
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% Index and End %%%
+%%%%%%%%%%%%%%%%%%%%%
+%\backmatter
+\printindex
+\end{document}
+
+%%% Last line %%%

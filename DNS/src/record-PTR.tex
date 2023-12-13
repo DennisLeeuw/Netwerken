@@ -1,0 +1,6 @@
+Het kan voorkomen dat we ook bij een IP-adres willen weten welk domein erbij hoort. Stel bijvoorbeeld dat iemand op ons systeem inlogt vanaf 142.251.36.46. Om dat mogelijk te maken met de tree-werking van DNS moeten we ook een reverse tree hebben. De oplossing die gekozen is om een apart domein te maken voor reverse lookups. Het domein is in-addr.arpa. Het TLD is dus .arpa. en de daarbij behorende functionele domein is in-addr (Internet Address).
+
+Domeinen zoeken we op van TLD naar domein naar host. Om IP-adressen te resolven moeten we dat ook omgekeerd doen, dus voor 142.251.36.46 moet dat worden eerst 142, dan 251, vervolgens 36 om uit te komen bij 42. Dus de query zou moeten zijn 46.36.251.142.in-addr.arpa. Dat is een moeilijke om elke keer goed te doen, dus lossen de tools die we gebruiken om DNS-queries uit te voeren dit zelf op. Ook de DNS database lost dit zelf op, maar we moeten hem wel vertellen dat het een reverse-database is.
+
+De reverse database is dus een andere database dan de forward database. In de reverse database hebben we dan ook geen A-records, maar PTR records. Het Pointer-record zegt hij dus behoort tot het in-addr.arpa domain.
+
