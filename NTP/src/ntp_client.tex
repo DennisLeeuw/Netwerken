@@ -1,0 +1,31 @@
+NTP gaat ervan uit dat de vertraging op het netwerk te meten is en dat deze gelijk is voor de heen- en de terugweg:
+\begin{enumerate}
+\item Client stuurt packet naar server en zet daarin een timestamp van zijn tijd (T1)
+\item De server registreert de tijd dat het packet binnen komt (T2)
+\item De server stuurt het packet weg op (T3) (Het packet van de server bevat T1, T2 en T3)
+\item De client ontvangt het packet op T4 en heeft nu 4 tijdstippen.
+\end{enumerate}
+De vertraging over de heenweg is T2-T1, de vertraging over de terugweg is T4-T3. Omdat we ervan uit gegaan dat de netwerkvertraging symmetrisch is moet een verschil tussen T2-T1 en T4-T3 te maken hebben met het verschil in de klok. Dit verschil in de klok noemen we de offset en kan berekend worden via:
+\[ offset = (T2 - T1 + T3 - T4)/2 \]
+De offset kan dus positief of negatief zijn afhankelijk van of onze klok achter of voor staat ten opzichte van de serverklok.
+
+Laten we in een tabel een rekenvoorbeeld maken. We zeggen dat de tijd op de server 10 seconden voor staat ten opzichte van de client, de network delay 20 seconden is en we beginnen op T1=0:
+\begin{center}
+\begin{tabular}{ |l|c|c|c|c|c|c| }
+\hline
+Actie & Tijd op client & T1 & T2 & T3 & T4 & Tijd op server \\
+\hline
+Client verstuurt T1 & 00 & 00 & - & - & - & 10 \\
+\hline
+Server ontvang T1 & 20 & 00 & 30 & - & - & 30 \\
+\hline
+Server verstuurt T1,T2,T3 & 22 & 00 & 30 & 32 & - & 32 \\
+\hline
+Client ontvangt packet & 42 & 00 & 30 & 32 & 42 & 52 \\
+\hline
+\end{tabular}
+\end{center}
+Hieruit kunnen we via de eerder genoemde formule de offset berekenen:
+\[ offset = (30 - 0 + 32 - 42)/2 = 10 \]
+en dat klopt precies met wat we al wisten, namelijk dat de server 10 seconden voorloopt op onze klok. We moeten onze klok dus 10 seconden vooruit zetten.
+
