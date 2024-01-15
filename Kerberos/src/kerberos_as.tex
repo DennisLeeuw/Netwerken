@@ -1,0 +1,15 @@
+De AS neemt een vraag tot authenticatie van een systeem op het netwerk aan en geeft aan dat systeem terug dat goed of niet goed is. Zoals gezegd gebeurt dit zonder dat het wachtwoord of een hash van het wachtwoord over het netwerk gaat.
+
+Als een gebruiker in wil loggen op een systeem geeft de persoon een gebruikersnaam en wachtwoord op. Dat systeem stuurt naar de AS een bericht met daarin de gebruikersnaam die wil inloggen. Dit is het zogenaamde AS\_REQ\index{AS\_REQ} bericht en het bevat dus niet het wachtwoord!
+
+De AS haalt op basis van de gebruikersnaam de hash van het wachtwoord van deze gebruiker uit de database. Ook wordt de hash van de Ticket Granting Service\index{Ticket Granting Service} uit de database gehaald. Op basis van deze hashes worden twee nieuwe hashes gemaakt:
+\begin{itemize}
+	\item Een Session Key\index{Session Key}, SK1, wordt versleuteld met de hash van de gebruiker.
+	\item De SK1, de gebruikers IP-adres en de geldigheidsduur van SK1 worden versleuteld met de hash van het Ticket Granting System\index{Ticket Granting System}. Dit is het zogenaamde Ticket Granting Ticket\index{Ticket Granting Ticket} (TGT\index{TGT})
+\end{itemize}
+Beide hashes worden terug gestuurd in de AS\_REP\index{AS\_REP} naar de client.
+
+De client ontvangt de hashes en kan door een hash te maken van het wachtwoord de SK1 ontsleutelen. Hiermee weet de client dat het wachtwoord correct was zonder dat het wachtwoord over de lijn is gegaan, dankzij symmetrische encryptie. Kan de client de hash niet ontsleutelen dan was of het opgegeven wachtwoord niet goed, of de AS is niet de juiste AS. Het kan natuurlijk zo zijn dat iemand probeert om met een valse AS de sessie te hijacken.
+
+Met het TGT kan de gebruiker (client) additionele diensten aanvragen op het netwerk, zolang als de TGT niet verlopen is. De TGT toont aan dat de gebruiker correct is ingelogd. De gebruiker kan de TGT niet decrypten, omdat het versleuteld is met de key van de TGS, dus de enige die er iets mee kan is de TGS.
+

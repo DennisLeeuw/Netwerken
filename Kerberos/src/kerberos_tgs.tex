@@ -1,0 +1,13 @@
+De Ticket Granting Service\index{Ticket Granting Service} (TGS\index{TGS}) is de dienst die door de KDC van kerberos aangeboden wordt om toegang te verlenen tot diensten en systemen. De gebruiker neemt met zijn TGT contact op met de TGS en vraagt daarbij toegang tot een bepaalde dienst. De TGS kan de TGT ontsleutelen omdat de TGT versleuteld is met de password hash van de TGS. De TGS controleert alle gegevens in de TGT en als het allemaal okee is dan wordt er een Service Ticket naar de gebruiker gestuurd. Het Service Ticket is versleuteld met de hash van de service, dus ook hier kan de gebruiker niets mee. De gebruiker stuurt het Service Ticket door naar de service, die kan met zijn eigen wachtwoord hash het Servive Ticket ontsleutelen en als dit lukt kent de service de gebruiksnaam en weet het dat de gebruiker geauthenticeerd is door de TGS.
+
+Om dit allemaal op een juiste manier te laten verlopen maakt de gebruiker een aanvraag aan voor de TGS. Dit wordt de zogenaamde TGS\_REQ\index{TGS\_REQ}. In deze TGS\_REQ zit de naam van de service zoals kerberos die kent (principal name), de TGT en een zogenaamde Authenticator die versleuteld is met de Session Key die de gebruiker heeft.
+
+Dit bericht komt aan bij de TGS. Deze kan met zijn hash de TGT ontsleutelen. Daarmee heeft de TGS de Session Key en kan dus de Authenticator ontsleutelen. Een ander ding dat uit het ontsleutelde bericht komt is het IP-adres van de aanvrager. De TGS kan dit adres vergelijken met het adres waarvan het het packet heeft verkregen. Is dit niet hetzelfde IP-adres dan probeert iemand waarschijnlijk een Replay-Attack uit te voeren. Is de Authenticator correct (time-stamp) en het IP-adres dan kan de TGS de aanvraag van de gebruiker vertrouwen.
+
+De TGS maakt nu een bericht voor de gebruiker, de zogenaamde TGS\_REP\index{TGS\_REP}. De TGS encrypts een generated session key (SK2) voor de principal en de server met de Session Key en het encrypts een Service Ticket (ST2) voor de service met de hash van de service. Beide gaan in de TGS\_REP en deze wordt verstuurd naar de gebruiker.
+
+Met de Session Key kan de gebruiker de generated session key (SK2) van de TGS in de TGS\_REP ontsleutelen. De gebruiker genereerd een nieuwe Authenticator (AUTH2) en encrypt deze met SK2. Deze nieuwe hash en de ontvangen ST2 hash worden doorgestuurd naar de service (AP\_REQ\index{AP\_REQ}).
+
+De service ontvangt de AP\_REQ. Met zijn eigen hash kan hij ST2 ontsleutelen en vindt daarin de SK2. Met de gevonden SK2 kan de service de AUTH2 hash ontsleutelen. Daarmee is de authenticatie van de principal tegen de service rond.
+
+

@@ -1,0 +1,11 @@
+Binnen kerberos is het noodzakelijk dat elke computer, gebruiker en dienst een hash heeft in de database van de KDC. Als je contact wil opnemen met een dienst die niet in de KDC staat dan gaat Single Sign On met kerberos niet werken.
+
+Met het gebruik van kerberos gaan er geen wachtwoorden over de lijn, een encrypte verbinding is in theorie dan ook niet nodig. Afluisteren van het verkeer heeft niet zo veel zin.
+
+Tickets hebben een levensduur en gaan kort mee (TGT een paar uur). Ook de berichten over het netwerk zijn voorzien van een time-stamp en hebben een beperkte geldigheid (5 minuten). Alles is voorzien van een time-stamp zodat replay attacks buitengewoon moeilijk worden. Omdat tijd zo'n belangrijk onderdeel is van het goed functioneren van kerberos is het van cruciaal belang dat de klokken in een netwerk gesyncroniseerd zijn. Dus NTP is meestal van cruciaal belang.
+
+Meer informatie:
+\begin{itemize}
+\item \url{https://web.mit.edu/kerberos/www/papers.html}
+\end{itemize}
+

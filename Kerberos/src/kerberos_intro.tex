@@ -1,0 +1,12 @@
+Kerberos is een client-server architectuur. Het maakt het mogelijk om op een veilige manier authenticatie te doen over onveilge netwerken. Kerberos gaat ervan uit dat de verbinding niet versteuteld is en dat informatie op het netwerk dus afgeluisterd kan worden. Met deze aannames zorgt kerberos voor een sterke authenticatie van gebruikers en diensten waarbij de integriteit (Integrity) en de vertrouwelijkheid (Confidentiality) gewaarborgd zijn.
+
+Bij authenticatie is het belangrijk dat zowel de zender als de ontvanger geverifieerd kunnen worden. Beide moeten zogezegd hun paspoort laten zien. Daarnaast is het belangrijk dat de data die over het netwerk gaat aankomt zoals deze verzonden is, de integriteit moet gewaarborgd zijn. Tot slot moet de gevoelige data niet afgeluisterd kunnen worden.
+
+Kerberos bestaat uit drie delen:
+\begin{itemize}
+	\item AS - Authentication Service
+	\item TGS - Ticket Granting Service
+	\item Service - De dienst waartoe we toegang willen hebben
+\end{itemize}
+De AS en de TGS zijn onderdeel van de KDC (Key Distribution Center).
+

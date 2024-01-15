@@ -1,0 +1,6 @@
+Om in te kunnen loggen op een remote server of service is het nodig dat een gebruiker zich authentiseerd, meestal gebeurt dat via een gebruikersnaam en wachtwoord. Het versturen van een gebruikersnaam en wachtwoord over het netwerk kan tot gevolg hebben dat dit wordt afgeluisterd en dat een hacker de veschikking krijgt over deze gegevens. De een onderdeel van een Man-In-The-Middle\index{Man-In-The-Middle attack} (MITM\index{MITM}) attack.
+
+Een oplossing voor dit probleem is dat we gebruikersnaam en het wachtwoord zouden kunnen encrypten en het dan over de lijn sturen. Een boefje zou dan wel mee kunnen luisteren, maar kan uit de verkregen data niet de gebruikersnaam en het wachtwoord halen. Hij kan echter wel deze hashes opnieuw versturen naar en server. De server kan het verschil niet maken en ziet de juiste gehashte credentials binnen komen en staat de login toe. Dit heet een Replay-Attack\index{Replay-Attack}.
+
+De enige veilige manier is om geen wachtwoord over de lijn te laten gaan. Niet in plain-text en niet in een encrypte vorm. En dit is waar Kerberos om de hoek komt kijken. Kerberos is een systeem waar wachtwoorden veilig worden opgeslagen, er geen wachtwoorden over de lijn gaan en er toch voor gezorgd wordt dat er controle op een door de gebruiker opgegeven wachtwoord plaats vindt.
+
